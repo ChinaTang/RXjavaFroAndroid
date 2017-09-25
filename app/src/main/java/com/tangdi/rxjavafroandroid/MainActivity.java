@@ -29,29 +29,6 @@ public class MainActivity extends AppCompatActivity {
         mainThreadRX = new MainThreadRX();
         mainThreadRX.SendOnOtherThread();
 
-        NetWorkFactory.createRetrofit().create(NetApi.class).Login(new LogingRequest())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<LogingResult>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(LogingResult value) {
-                        Log.d(TAG, value.toString());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "Login error");
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "Login success");
-                    }
-                });
+        mainThreadRX.RXmapChange();
     }
 }
